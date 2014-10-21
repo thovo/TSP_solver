@@ -16,3 +16,6 @@ Program different algorithms for the TSP problem:
 6. randomized approach
 7. genetic programming or ant colony approach
 8. personal
+
+##Links
+Bug Reporting Sheet: https://docs.google.com/spreadsheets/d/1iM3Q-NSkg1XMenFke9Lvh7bvMRoku8iGFINiN9yM6tg/edit#gid=0

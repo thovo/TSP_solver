@@ -1,0 +1,1 @@
+This is the chosen datasets. They are the smallest 7 datasets in the tsp lib 

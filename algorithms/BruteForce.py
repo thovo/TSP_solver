@@ -1,7 +1,7 @@
 # Implementation of the Brute Force algorithm
 from itertools import *
 
-def BruteForce(BF_arrMatrix):
+def GeneratePaths(BF_arrMatrix):
     # Extracting the nodes of the TSP
     lstNodes = [node for node in range(len(BF_arrMatrix))]
     # Enumerating all the paths from the nodes
@@ -10,8 +10,13 @@ def BruteForce(BF_arrMatrix):
     lstTree = list(map(list, lstPermutations))
     # Closing the paths / Constructing full cycles
     for path in lstTree:
-        path.append(path[0])
+        path.append(path[0])  
+    return lstNodes, lstTree
 
+def BruteForce(BF_arrMatrix):
+    # Generate all the possible paths
+    lstNodes, lstTree = GeneratePaths(BF_arrMatrix)
+    
     # Calculating the cost of each cycle
     lstCostList = []
     for cycle in lstTree:
@@ -23,10 +28,11 @@ def BruteForce(BF_arrMatrix):
             #   each 2 nodes in a cycle
             numCostPerCycle = numCostPerCycle + BF_arrMatrix[cycle[index]][cycle[index+1]]
         lstCostList.append(numCostPerCycle)
-
+    
     # Calculating the least cost cycle
     numLeastCost = min(lstCostList)
     numLeastCostIndex = lstCostList.index(numLeastCost)
-
+    
     # Displaying the least cost cycle
-    print(lstTree[numLeastCostIndex])
+    print(lstTree[numLeastCostIndex], "with cost = ", numLeastCost)
+

@@ -11,16 +11,22 @@ def tsplib_xml_parse (filename):
     """
     tree = ET.parse(filename)
     root = tree.getroot()
-    
+
+    #The list contain the final r
     final_output = []
-    
-    dataset_name = root.tag
-    final_output.append(dataset_name)
-    
+
     number_of_cities = 0
     final_matrix = []
     
     for child in root:
+        #Get the name of the dataset
+        if (child.tag == "name"):
+            dataset_name = child.text
+            final_output.append(dataset_name)
+        #Get the description of the dataset
+        if (child.tag == "description"):
+            dataset_description = child.text
+            final_output.append(dataset_description)
         if (child.tag == "graph"):
             for vertex in child:
                 temp_array = []
@@ -41,7 +47,8 @@ def tsplib_xml_parse (filename):
     return final_output
 
 #Example - Uncomment the following code and put a valid path for any xml file from TSP LIB
-#test_matrix = tsplib_xml_parse('burma14.xml')
-#print test_matrix[0]
-#print test_matrix[1]
-#print test_matrix[2]
+test_matrix = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
+print test_matrix[0]
+print test_matrix[1]
+print test_matrix[2]
+print test_matrix[3][0]

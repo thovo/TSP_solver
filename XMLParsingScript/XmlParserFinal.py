@@ -43,12 +43,14 @@ def tsplib_xml_parse (filename):
         vertex_index += 1
         
     final_output.append(final_matrix)
-    
+    print "Working on data set:"+final_output[0]
+    print "Data description:"+final_output[1]
+    print "The number of cities is:"+str(final_output[2])
     return final_output
 
 #Example - Uncomment the following code and put a valid path for any xml file from TSP LIB
-test_matrix = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
-print test_matrix[0]
-print test_matrix[1]
-print test_matrix[2]
-print test_matrix[3][0]
+# test_matrix = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
+# print test_matrix[0]
+# print test_matrix[1]
+# print test_matrix[2]
+# print test_matrix[3][0]

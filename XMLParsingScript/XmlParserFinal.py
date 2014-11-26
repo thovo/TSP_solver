@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
- 
-def tsplib_xml_parse (filename):
+
+
+def tsplib_xml_parse(filename):
     """
     This function take as an input the name of the XML file
     
@@ -20,14 +21,14 @@ def tsplib_xml_parse (filename):
     
     for child in root:
         #Get the name of the dataset
-        if (child.tag == "name"):
+        if child.tag == "name":
             dataset_name = child.text
             final_output.append(dataset_name)
         #Get the description of the dataset
-        if (child.tag == "description"):
+        if child.tag == "description":
             dataset_description = child.text
             final_output.append(dataset_description)
-        if (child.tag == "graph"):
+        if child.tag == "graph":
             for vertex in child:
                 temp_array = []
                 for edge in vertex:

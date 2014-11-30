@@ -50,6 +50,8 @@ def check_solution_valid(tour):
         city2 = tour[index + 1]
 	if (city_matrix[city1][city2] == float("inf")):
 	    return False
+    if (city_matrix[num_cities - 1][0] == float("inf")):
+	return False
     return True
     
 def MatrixRandomize():
@@ -70,7 +72,7 @@ def Fitness(tour):
         city2 = tour[index + 1]
 	link_len = city_matrix[city1][city2]
 	fitness_sum += link_len
-    #fitness_sum = sum(v)
+    fitness_sum += city_matrix[tour[num_cities - 1]][tour[0]]
     #print tour
     #print fitness_sum
     return fitness_sum
@@ -99,7 +101,8 @@ def MatrixPerturb(tour, prob):
     return c    
 
 #city_matrix = generate_matrices(size = num_cities)
-matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
+#matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
+matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
 dataset_name = matrix_read[0]
 num_cities = matrix_read[1]
 city_matrix = matrix_read[2]
@@ -120,13 +123,13 @@ fits = MatrixCreate(number_iterations,number_generations)
 for iteration in range(number_iterations):
     parent = MatrixCreate(1, num_cities)
     parent = MatrixRandomize() 
-    parentFitness = Fitness(parent)     
+    parentFitness = Fitness(parent)
     print ("parent_before = ",parentFitness)
     #print ("best solution = ", best_solution)
     for currentGeneration in range(number_generations):
         #print currentGeneration, parentFitness 
         child = MatrixPerturb(parent, 0.05) 
-        childFitness = Fitness(child) 
+        childFitness = Fitness(child)
         if childFitness < parentFitness:
             parent = child[:] 
             parentFitness = childFitness

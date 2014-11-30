@@ -1,0 +1,28 @@
+Steps to make the GA algorithm.
+
+- General Parameters:
+	* size of population = 2000
+	* max number of generation = 5000
+	* number of siblings = 5
+	* size of each cluster = (size of population) / (number of siblings)
+	* number of iterations
+
+- Initialization:
+	* initialize the the population with random routes.
+	
+- For loop over the number of generations
+	* Measure the fitness of all solutions we have.
+	* The clustering step:
+		- Create a new list containing a copy of the whole the population
+		- shuffle this new list - randomize it -.
+		- choose random samples "clusters".
+		- for each cluster, select the top performer in it.
+	* Mutation Step
+		- For each one of the selected top performers in the previous steps, generate (number of siblings), by looping over the following methods:
+			-- switch a random segment
+			-- flip the middle segment
+			-- point mutations
+			-- shift
+			-- NOTHING - just make a copy of the parent in the new generation
+		and put the new siblings in a "new generation" list.
+	* Update the algorithm

@@ -1,10 +1,13 @@
 # Implementation of the Branch and Bound Algorithm
 from itertools import *
+from time import clock
 from BruteForce import GeneratePaths
 
-def BranchNBound(BF_arrMatrix):
+def BranchNBound(BnB_arrMatrix):
+    # Start timer
+    start = clock()
     # Generate the TSP nodes and all the possible paths
-    lstNodes, lstTree = GeneratePaths(BF_arrMatrix)
+    lstNodes, lstTree = GeneratePaths(BnB_arrMatrix)
     
     # Calculating the cost of each cycle
     lstCostList = []
@@ -17,11 +20,10 @@ def BranchNBound(BF_arrMatrix):
         for index in range(0,(len(lstNodes)-1)):
             # CostPerCycle is calculated from the input Matrix between 
             #   each 2 nodes in a cycle
-            numCostPerCycle = numCostPerCycle + BF_arrMatrix[cycle[index]][cycle[index+1]]
+            numCostPerCycle = numCostPerCycle + BnB_arrMatrix[cycle[index]][cycle[index+1]]
             # Check the current accumlated cost against the Current Best Cost
             if (numCostPerCycle >= numCurrentBestCost):
                 numCostPerCycle = float("inf")
-                #print("Cut!")
                 break
             
         # Add the first cycle cost as the best one
@@ -37,6 +39,8 @@ def BranchNBound(BF_arrMatrix):
     numLeastCost = min(lstCostList)
     numLeastCostIndex = lstCostList.index(numLeastCost)
 
-    # Displaying the least cost cycle
-    print(lstTree[numLeastCostIndex], "with cost = ", numLeastCost)
-
+    BnB_time = clock() - start
+    
+    BnB_output = ["Branch and Bound", numLeastCost, lstTree[numLeastCostIndex], BnB_time]
+    
+    return(BnB_output)    

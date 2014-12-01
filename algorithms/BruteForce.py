@@ -1,19 +1,27 @@
 # Implementation of the Brute Force algorithm
 from itertools import *
+from time import clock
 
 def GeneratePaths(BF_arrMatrix):
     # Extracting the nodes of the TSP
     lstNodes = [node for node in range(len(BF_arrMatrix))]
+    # Remove the last city to generate non cyclic permutations
+    last_node = lstNodes.pop()
     # Enumerating all the paths from the nodes
     lstPermutations = list(permutations(lstNodes))
     # Constructing a tree
     lstTree = list(map(list, lstPermutations))
+    
     # Closing the paths / Constructing full cycles
     for path in lstTree:
+        path.append(last_node)
         path.append(path[0])  
     return lstNodes, lstTree
 
 def BruteForce(BF_arrMatrix):
+    # Start time
+    start = clock()
+    
     # Generate all the possible paths
     lstNodes, lstTree = GeneratePaths(BF_arrMatrix)
     
@@ -33,6 +41,9 @@ def BruteForce(BF_arrMatrix):
     numLeastCost = min(lstCostList)
     numLeastCostIndex = lstCostList.index(numLeastCost)
     
-    # Displaying the least cost cycle
-    print(lstTree[numLeastCostIndex], "with cost = ", numLeastCost)
+    BF_time = clock() - start
+
+    BF_output = ["Brute Force", numLeastCost, lstTree[numLeastCostIndex], BF_time]
+    
+    return(BF_output)
 

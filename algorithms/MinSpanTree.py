@@ -122,6 +122,6 @@ def MinSpanTree(MST_arrMatrix):
 	# Calculate the total execution time for algorithm
 	MST_time = clock() - start
 	# Generate the final output form
-	MST_output = [MST_tour_cost, MST_lstTour, MST_time]
+	MST_output = ["Minimum Spanning Tree", MST_tour_cost, MST_lstTour, MST_time]
 	
 	return(MST_output)

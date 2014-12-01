@@ -102,7 +102,7 @@ def MatrixPerturb(tour, prob):
 
 #city_matrix = generate_matrices(size = num_cities)
 #matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
-matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
+matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/br17.xml')
 dataset_name = matrix_read[0]
 num_cities = matrix_read[1]
 city_matrix = matrix_read[2]

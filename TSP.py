@@ -2,6 +2,8 @@ __author__ = 'thovo'
 
 import os
 from prettytable import PrettyTable
+from algorithms import BruteForce
+from algorithms import BranchNBound
 from algorithms import Greedy
 from algorithms import Randomized
 from algorithms import MinSpanTree
@@ -128,7 +130,7 @@ def tsp():
     #The list of available algorithms
     algorithms = [[1, "Greedy"], [2, "Randomized"],
                   [3, "Brute Force"], [4, "Branch and Bound"],
-                  [5, "Genetic or Ant Colony"], [6, "Evolution"], [7, "Minimum Spanning Tree"]]
+                  [5, "Genetic"], [6, "Evolutionary"], [7, "Minimum Spanning Tree"]]
     algorithms_table = PrettyTable(["Number", "Algorithm"])
     for i in range(0, len(algorithms)):
         algorithms_table.add_row(algorithms[i])
@@ -161,15 +163,15 @@ def tsp():
                 # We need only the list of cities
             if int(algorithm_number) == 3:
                 print "You chose Brute Force!"
-                results.append()
+                results.append(BruteForce.BruteForce(cities[3]))
             if int(algorithm_number) == 4:
                 print "You chose Branch and Bound!"
-                results.append()
+                results.append(BranchNBound.BranchNBound(cities[3]))
             if int(algorithm_number) == 5:
-                print "You chose Genetic or Ant Colony!"
+                print "You chose Genetic!"
                 results.append()
             if int(algorithm_number) == 6:
-                print "You chose Evolution!"
+                print "You chose Evolutionary!"
                 results.append()
             if int(algorithm_number) == 7:
                 print "You chose MST!"

@@ -46,7 +46,7 @@ def check_solution_valid(tour):
         if (city_matrix[city1][city2] == float("inf")):
             return False
     if (city_matrix[num_cities - 1][0] == float("inf")):
-	return False    
+        return False    
     return True
 
 def MatrixRandomize(population_size):
@@ -76,7 +76,7 @@ def Fitness(tours,pop_size):
             city2 = tour[index + 1]
             link_len = city_matrix[city1][city2]
             fitness_sum[fitness_sum_index] += link_len
-	fitness_sum[fitness_sum_index] += city_matrix[tour[num_cities - 1]][tour[0]]
+        fitness_sum[fitness_sum_index] += city_matrix[tour[num_cities - 1]][tour[0]]
         fitness_sum_index += 1
     return fitness_sum
 
@@ -108,7 +108,7 @@ def cluster_select(tours):
             index_1 = random.choice(range(num_cities))
             index_2 = random.choice(range(num_cities))
         index = [index_1,index_2]  
-        
+
         #Start the mutation process
         for j in range(num_siblings):
             copy_best_performer = deepcopy(best_performer)
@@ -148,7 +148,7 @@ def cluster_select(tours):
 def MatrixPerturb(parent_tours):
     #print tour
     #col_len = len(tour)
-    
+
     tour_copied = deepcopy(parent_tours)
     new_generation = cluster_select(tour_copied)
     return new_generation

@@ -11,12 +11,15 @@ import random
 from BruteForce import *
 from collections import *
 import operator
+from time import clock
 
 pop_size = 2000
 number_iterations = 1
 number_generations = 600
 num_siblings = 5
 cluster_size = pop_size/num_siblings
+city_matrix = []
+num_cities = 0
 
 def generate_matrices(size = 5):
     # Change the size value for bigger data set
@@ -146,75 +149,77 @@ def cluster_select(tours):
     #pass
 
 def MatrixPerturb(parent_tours):
-    #print tour
-    #col_len = len(tour)
-
     tour_copied = deepcopy(parent_tours)
     new_generation = cluster_select(tour_copied)
     return new_generation
-    #for j in range(col_len):
-        #if prob > random.random(): # this probability decides if a mutation happens or not
-            #index_1 = 0
-            #index_2 = 0
-            #while (index_1 == index_2):
-                #index_1 = random.choice(range(col_len))
-                #index_2 = random.choice(range(col_len))
 
-            #swap_value = c[index_1]
-            #c[index_1] = c[index_2]
-            #c[index_2] = swap_value
-    #return c    
-
-#city_matrix = generate_matrices(size = num_cities)
-#matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/burma14.xml')
-matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
-dataset_name = matrix_read[0]
-num_cities = matrix_read[1]
-city_matrix = matrix_read[2]
-#print city_matrix
-
-parents = MatrixCreate(pop_size, num_cities) 
-#print parents
-parents = MatrixRandomize(pop_size) 
-#print parents
-parentsFitness = Fitness(parents,pop_size) 
-#print parentsFitness
-[best_performer,best_score_parent,index_best] = best_inv(parents,parentsFitness,pop_size,num_cities)
-#print [best_performer,best_score,index_best]
-fits = MatrixCreate(number_iterations,number_generations)
-
-for iteration in range(number_iterations):
-    print parents
-    print ("best_score_before = ",best_score_parent)
-    for currentGeneration in range(number_generations):
-        #print currentGeneration
-        childern = MatrixPerturb(parents) 
-        #print childern
-        childernFitness = Fitness(childern,pop_size) 
-        [best_performer,best_score_child,index_best] = best_inv(childern,childernFitness,pop_size,num_cities)
-        if best_score_child < best_score_parent:
-            parents = deepcopy(childern) 
-            best_score_parent = best_score_child
-        fits[iteration][currentGeneration] = best_score_parent
-        print best_score_child
-        #print best_score
+def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population_size = 2000, num_gen = 600):
+    global pop_siz
+    global number_iterations
+    global number_generations
+    global num_siblings
+    global cluster_size
+    global city_matrix
+    global num_cities
+    
+    pop_size = population_size
+    number_iterations = num_iter
+    number_generations = num_gen
+    num_siblings = 5
+    cluster_size = pop_size/num_siblings
+    
+    city_matrix = city_matrix_input
+    num_cities = number_cities
+    
+    #matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
+    #dataset_name = matrix_read[0]
+    #num_cities = matrix_read[1]
+    #city_matrix = matrix_read[2]
+    
     parents = MatrixCreate(pop_size, num_cities) 
     parents = MatrixRandomize(pop_size) 
     parentsFitness = Fitness(parents,pop_size) 
     [best_performer,best_score_parent,index_best] = best_inv(parents,parentsFitness,pop_size,num_cities)
-    print ("parent_after = ",parentsFitness)
-    print ("---------")
-
-figure(1)    
-plot (range(number_generations),fits[0])
-ylabel('Fitness')
-xlabel('Generation')
-#figure(2)
-#imshow(fits, cmap=cm.gray, aspect='auto', interpolation='nearest')
-#ylabel('Gene')
-#xlabel('Generation')
-#figure (3)
-#plot (range(number_generations),fits[0], range(number_generations), fits[1], range(number_generations), fits[2], range(number_generations), fits[3], range(number_generations), fits[4])
-#ylabel('Fitness')
-#xlabel('Generation')
-show()
+    fits = MatrixCreate(number_iterations,number_generations)
+    
+    for iteration in range(number_iterations):
+        print parents
+        print ("best_score_before = ",best_score_parent)
+        for currentGeneration in range(number_generations):
+            #print currentGeneration
+            childern = MatrixPerturb(parents) 
+            #print childern
+            childernFitness = Fitness(childern,pop_size) 
+            [best_performer,best_score_child,index_best] = best_inv(childern,childernFitness,pop_size,num_cities)
+            if best_score_child < best_score_parent:
+                parents = deepcopy(childern) 
+                best_score_parent = best_score_child
+            fits[iteration][currentGeneration] = best_score_parent
+            print best_score_child
+            #print best_score
+        parents = MatrixCreate(pop_size, num_cities) 
+        parents = MatrixRandomize(pop_size) 
+        parentsFitness = Fitness(parents,pop_size) 
+        [best_performer,best_score_parent,index_best] = best_inv(parents,parentsFitness,pop_size,num_cities)
+        print ("parent_after = ",parentsFitness)
+        print ("---------")
+    
+    #figure(1)    
+    #plot (range(number_generations),fits[0])
+    #ylabel('Fitness')
+    #xlabel('Generation')
+    ##figure(2)
+    ##imshow(fits, cmap=cm.gray, aspect='auto', interpolation='nearest')
+    ##ylabel('Gene')
+    ##xlabel('Generation')
+    ##figure (3)
+    ##plot (range(number_generations),fits[0], range(number_generations), fits[1], range(number_generations), fits[2], range(number_generations), fits[3], range(number_generations), fits[4])
+    ##ylabel('Fitness')
+    ##xlabel('Generation')
+    #show()
+    
+matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
+dataset_name = matrix_read[0]
+n_c = matrix_read[1]
+c = matrix_read[2]
+genetic_algorithm(city_matrix_input=c,number_cities=n_c)

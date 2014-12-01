@@ -4,6 +4,7 @@ import os
 from prettytable import PrettyTable
 from algorithms import Greedy
 from algorithms import Randomized
+from algorithms import MinSpanTree
 from XMLParsingScript import XmlParserFinal
 import xlwt
 from datetime import datetime
@@ -27,7 +28,7 @@ def read_dataset():
     files_data = []  # List which will store all of the full filepaths.
 
     # Walk the tree.
-    for root,directories, files in os.walk(directory):
+    for root, directories, files in os.walk(directory):
         for file_name in files:
             #Get only xml file
             if file_name.endswith(".xml"):
@@ -109,7 +110,7 @@ def tsp():
         print "We are now working on the data set: "+str(user_data_input)
         data_path = check_user_input(user_data_input,3)
         cities = XmlParserFinal.tsplib_xml_parse(str(data_path))
-        print cities
+        # print cities
     if int(user_input) is 2:
         print "WARNING: We accept only xml file and have the same format like TSP lib!"
         user_data_input = raw_input("Enter the full path to your data set:")
@@ -127,7 +128,7 @@ def tsp():
     #The list of available algorithms
     algorithms = [[1, "Greedy"], [2, "Randomized"],
                   [3, "Brute Force"], [4, "Branch and Bound"],
-                  [5, "Genetic or Ant Colony"], [6, "Evolution"]]
+                  [5, "Genetic or Ant Colony"], [6, "Evolution"], [7, "Minimum Spanning Tree"]]
     algorithms_table = PrettyTable(["Number", "Algorithm"])
     for i in range(0, len(algorithms)):
         algorithms_table.add_row(algorithms[i])
@@ -152,11 +153,11 @@ def tsp():
         for algorithm_number in algorithm_list:
             if int(algorithm_number) == 1:
                 print "You chose Greedy!"
-                results.append(Greedy.greedy(cities[3]))
+                results.append(Greedy.better_greedy(cities[3]))
                 # We need only the list of cities
             if int(algorithm_number) == 2:
                 print "You chose Randomized!"
-                results.append(Randomized.better_result_of_randomized(cities[3]))
+                results.append(Randomized.better_result_of_randomized(cities[3], 10000))
                 # We need only the list of cities
             if int(algorithm_number) == 3:
                 print "You chose Brute Force!"
@@ -170,6 +171,9 @@ def tsp():
             if int(algorithm_number) == 6:
                 print "You chose Evolution!"
                 results.append()
+            if int(algorithm_number) == 7:
+                print "You chose MST!"
+                results.append(MinSpanTree.MinSpanTree(cities[3]))
 
     if int(user_algorithm_options_input) == 2:
         print "WARNING: You chose to run all algorithms. " \
@@ -181,7 +185,7 @@ def tsp():
     print "The result will be sorted by cost"
     print result_table.get_string(sortby="Cost")
 
-    # #Create a xlsx file
+    # #Create a xls file
 
     book = xlwt.Workbook(encoding="utf-8")
     worksheet = book.add_sheet("Comparison of algorithms")

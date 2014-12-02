@@ -3,12 +3,15 @@
 ### Some Explanation
 ## The fitness is defined as the average of all the values in the gene
 ###
+import sys
+sys.path.append('../XMLParsingScript')
+
+#import file
 from pylab import *
 from numpy import *
 from XmlParserFinal import *
 from copy import copy, deepcopy
 import random
-from BruteForce import *
 from collections import *
 import operator
 from time import clock
@@ -20,21 +23,6 @@ num_siblings = 5
 cluster_size = pop_size/num_siblings
 city_matrix = []
 num_cities = 0
-
-def generate_matrices(size = 5):
-    # Change the size value for bigger data set
-    #size = 5
-    # Change weigh max and min for different weights
-    weight_max = 3
-    weight_min = 1
-    matrix = [[randint(weight_min,weight_max) for i in range(size)] for j in range(size)]
-
-    for j in range(len(matrix)):
-        for i in range(len(matrix[j])):
-            if i == j:
-                matrix[i][j] = 0    
-
-    return matrix
 
 def MatrixCreate(rows, columns):
     Matrix = [[None for i in range(columns)] for j in range(rows)]
@@ -153,7 +141,7 @@ def MatrixPerturb(parent_tours):
     new_generation = cluster_select(tour_copied)
     return new_generation
 
-def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population_size = 2000, num_gen = 600):
+def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population_size = 2000, num_gen = 200):
     global pop_siz
     global number_iterations
     global number_generations
@@ -161,6 +149,8 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
     global cluster_size
     global city_matrix
     global num_cities
+    
+    start = clock()
     
     pop_size = population_size
     number_iterations = num_iter
@@ -182,6 +172,9 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
     [best_performer,best_score_parent,index_best] = best_inv(parents,parentsFitness,pop_size,num_cities)
     fits = MatrixCreate(number_iterations,number_generations)
     
+    very_best_tour = []
+    very_best_cost = 0.0
+    
     for iteration in range(number_iterations):
         print parents
         print ("best_score_before = ",best_score_parent)
@@ -194,15 +187,25 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
             if best_score_child < best_score_parent:
                 parents = deepcopy(childern) 
                 best_score_parent = best_score_child
+                best_performer_parent = best_performer + [best_performer[0]]
+                print best_score_child
+                print best_performer_parent                
+                print currentGeneration
+                print ("---------------")
             fits[iteration][currentGeneration] = best_score_parent
-            print best_score_child
             #print best_score
+        very_best_tour = best_performer_parent
+        very_best_cost = best_score_parent
         parents = MatrixCreate(pop_size, num_cities) 
         parents = MatrixRandomize(pop_size) 
         parentsFitness = Fitness(parents,pop_size) 
         [best_performer,best_score_parent,index_best] = best_inv(parents,parentsFitness,pop_size,num_cities)
-        print ("parent_after = ",parentsFitness)
-        print ("---------")
+        #print ("parent_after = ",parentsFitness)
+        #print ("---------")
+    
+    GA_time = clock() - start
+    
+    GA_output = ["Genetic Algorithm",very_best_cost,very_best_tour,GA_time]
     
     #figure(1)    
     #plot (range(number_generations),fits[0])
@@ -218,8 +221,12 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
     ##xlabel('Generation')
     #show()
     
-matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
-dataset_name = matrix_read[0]
-n_c = matrix_read[1]
-c = matrix_read[2]
-genetic_algorithm(city_matrix_input=c,number_cities=n_c)
+    return GA_output
+    
+#matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
+#print matrix_read
+#dataset_name = matrix_read[0]
+#n_c = matrix_read[1]
+#c = matrix_read[2]
+##genetic_algorithm(city_matrix_input=c,number_cities=n_c)
+#print genetic_algorithm(city_matrix_input=c,number_cities=n_c, population_size=2000, num_gen = 200)

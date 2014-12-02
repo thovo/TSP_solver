@@ -8,7 +8,7 @@ import Greedy
 import Randomized
 import MinSpanTree
 import GA
-import EA_hillclimbing
+#import EA_hillclimbing
 
 
 class TestResult:
@@ -40,27 +40,27 @@ def run_test(algorithm, dataset):
         result = BruteForce.BruteForce(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], 1)
+                                 result[3], 1).get_result()
     elif algorithm == "BranchNBound":
         result = BranchNBound.BranchNBound(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], 1)
+                                 result[3], 1).get_result()
     elif algorithm == "Greedy":
         result = Greedy.better_greedy(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown")
+                                 result[3], "Unknown").get_result()
     elif algorithm == "Randomized":
         result = Randomized.better_result_of_randomized(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown")
+                                 result[3], "Unknown").get_result()
     elif algorithm == "MinSpanTree":
         result = MinSpanTree.MinSpanTree(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown")        
+                                 result[3], "Unknown").get_result()
     else:
         raise Exception("Wrong algorithm chosen!")
     

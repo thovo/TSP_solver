@@ -142,7 +142,7 @@ def MatrixPerturb(parent_tours):
     return new_generation
 
 def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population_size = 2000, num_gen = 200):
-    global pop_siz
+    global pop_size
     global number_iterations
     global number_generations
     global num_siblings

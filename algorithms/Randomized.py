@@ -62,9 +62,9 @@ def better_result_of_randomized(cities, iteration=1000):
             result[2] = result_temp[2]
     stop = timeit.default_timer()
     result[3] = stop - start
-    print "The cost of the tour is:"+str(result[0])
-    print "The path of the tour is:"+str(result[1])
-    print "The time to finish is:"+str(result[2])+" in second"
+    # print "The cost of the tour is:"+str(result[0])
+    # print "The path of the tour is:"+str(result[1])
+    # print "The time to finish is:"+str(result[2])+" in second"
     return result
 
 # data = XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")

@@ -25,7 +25,7 @@ from datetime import datetime
 
 
 def read_dataset():
-    dir_name = os.path.dirname(__file__)
+    dir_name = os.path.dirname(os.path.realpath(__file__))
     directory = dir_name + "/tsp_lib_xml_datasets"
     files_data = []  # List which will store all of the full filepaths.
 

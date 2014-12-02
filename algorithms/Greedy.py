@@ -73,7 +73,7 @@ def better_greedy(cities):
     # print "The path of the tour is:"+str(result[2])
     result[3] = stop - start
     # print "The time to finish is:"+str(result[3])+" in second"
-    print result
+    # print result
     return result
 
 # data = XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")

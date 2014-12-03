@@ -1,6 +1,6 @@
 __author__ = 'thovo'
 import sys
-from XMLParsingScript import XmlParserFinal
+#from XMLParsingScript import XmlParserFinal
 import timeit
 import random
 import time

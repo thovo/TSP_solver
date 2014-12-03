@@ -1,8 +1,9 @@
 __author__ = 'thovo'
 import sys
-import XMLParsingScript
-from algorithms import Randomized
-from algorithms import Greedy
+sys.path.insert(0, "../algorithms")
+#import XMLParsingScript
+#from algorithms import Randomized
+import Greedy
 import timeit
 import random
 import time
@@ -49,11 +50,12 @@ def two_opt_swap(path, i=1, k=2):
 
 
 def two_opt(cities):
-    start = timeit.default_timer()
+    #start = timeit.default_timer()
+    start = time.clock()
     result = []
     #Get a random or initial tour
     #result = Randomized.randomized(cities)
-    result = Greedy.greedy(cities, 5)
+    result = Greedy.greedy(cities)
     print result
     path = result[2]
     cost = result[1]
@@ -73,8 +75,8 @@ def two_opt(cities):
                 result[2] = new_path
             k += 1
         i += 1
-    stop = timeit.default_timer()
-    time_finish = stop - start
+    #stop = timeit.default_timer()
+    time_finish = time.clock() - start
     algorithm = "2-opt"
     result[0] = algorithm
     result[3] = time_finish
@@ -82,5 +84,5 @@ def two_opt(cities):
     return result
 
 #Testing
-data = XMLParsingScript.XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")
-two_opt(data[3])
+#data = XMLParsingScript.XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")
+#two_opt(data[3])

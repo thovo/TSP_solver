@@ -25,6 +25,11 @@ def MatrixCreate(rows, columns):
     #print Matrix
     return Matrix
 
+
+#city_matrix = [[0, 11.0, 11.0, 10.0, inf], [11.0, 0, 11.0, 10.0, 10.0], [11.0, 11.0, 0, 10.0, 10.0], [10.0, 10.0, 10.0, 0, 12.0], [inf, 10.0, 10.0, 12.0, 0]]
+#num_cities = 5
+#tour = [2, 4, 3, 0, 1]
+
 def check_solution_valid(tour):
     global num_cities
     global city_matrix
@@ -33,18 +38,24 @@ def check_solution_valid(tour):
         city2 = tour[index + 1]
         if (city_matrix[city1][city2] == float("inf")):
             return False
-    if (city_matrix[num_cities - 1][0] == float("inf")):
+    city1 = tour[num_cities - 1]
+    city2 = tour[0]    
+    if (city_matrix[city1][city2] == float("inf")):
         return False
     return True
+
+#print check_solution_valid(tour)
 
 def MatrixRandomize():
     global num_cities
     cities_list = range(num_cities)
     while(True):
         x = random.sample(cities_list,num_cities)
-        if (check_solution_valid(x) == True):
-            return x
-    raise ValueError("No good tour")
+        try:
+            if (check_solution_valid(x) == True):
+                return x
+        except:
+            raise ValueError("No good tour")
 
 def Fitness(tour):
     global num_cities
@@ -87,7 +98,7 @@ def MatrixPerturb(tour, prob):
 #city_matrix = matrix_read[2]
 num_cities = 0
 city_matrix = []
-def hillclimbing_algorithm(city_matrix_input, number_cities, num_iter = 50, num_gen = 5000):
+def hillclimbing_algorithm(city_matrix_input, number_cities, num_iter = 1, num_gen = 10000):
     global num_cities
     global city_matrix
     
@@ -116,6 +127,7 @@ def hillclimbing_algorithm(city_matrix_input, number_cities, num_iter = 50, num_
         parent = MatrixRandomize() 
         parentFitness = Fitness(parent)
         for currentGeneration in range(number_generations):
+            #print currentGeneration
             child = MatrixPerturb(parent, 0.05) 
             childFitness = Fitness(child)
             if childFitness < parentFitness:
@@ -125,8 +137,8 @@ def hillclimbing_algorithm(city_matrix_input, number_cities, num_iter = 50, num_
         if (parentFitness < best_score):
             best_score = parentFitness
             best_solution = parent + [parent[0]]
-        #print ("parent_after = ",parentFitness)
-        #print ("---------")
+        #print ("EA-HILL ====== parent_after = ",parentFitness)
+        #print ("EA-HILL ====== ---------")
     EA_time = clock() - start
     EA_output = ["Evolutionary-HillClimbing",best_score,best_solution,EA_time]
     #print fits

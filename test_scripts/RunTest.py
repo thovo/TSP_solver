@@ -8,8 +8,8 @@ import Greedy
 import Randomized
 import MinSpanTree
 import GA
-#import EA_hillclimbing
-
+import EA_hillclimbing
+import TwoOpt
 
 class TestResult:
     def __init__(self, algorithm, num_cities, symmetry, distribution, sparsity, 
@@ -61,6 +61,17 @@ def run_test(algorithm, dataset):
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
                                  result[3], "Unknown").get_result()
+    elif algorithm == "EA_hillclimbing":
+            result = EA_hillclimbing.hillclimbing_algorithm(dataset[1], dataset[0][0])
+            test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
+                                     dataset[0][2], dataset[0][3], dataset[0][4], 
+                                     result[3], "Unknown").get_result()
+            
+    elif algorithm == "TwoOpt":
+            result = TwoOpt.two_opt(dataset[1])
+            test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
+                                     dataset[0][2], dataset[0][3], dataset[0][4], 
+                                     result[3], "Unknown").get_result()    
     else:
         raise Exception("Wrong algorithm chosen!")
     

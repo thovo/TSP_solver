@@ -36,8 +36,10 @@ def check_solution_valid(tour):
         city2 = tour[index + 1]
         if (city_matrix[city1][city2] == float("inf")):
             return False
-    if (city_matrix[num_cities - 1][0] == float("inf")):
-        return False    
+    city1 = tour[num_cities - 1]
+    city2 = tour[0]    
+    if (city_matrix[city1][city2] == float("inf")):
+        return False
     return True
 
 def MatrixRandomize(population_size):
@@ -226,7 +228,7 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
 #matrix_read = tsplib_xml_parse('../tsp_lib_xml_datasets/gr17.xml')
 #print matrix_read
 #dataset_name = matrix_read[0]
-#n_c = matrix_read[1]
-#c = matrix_read[2]
+#n_c = matrix_read[2]
+#c = matrix_read[3]
 ##genetic_algorithm(city_matrix_input=c,number_cities=n_c)
 #print genetic_algorithm(city_matrix_input=c,number_cities=n_c, population_size=2000, num_gen = 200)

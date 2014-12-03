@@ -3,19 +3,20 @@
 # output in "json" easily retrievable format for further analysis
 
 import os
+from os import listdir
+from os.path import isfile, join
 import json
 from RunTest import *
 from RandomGenerator import *
 
-
 def run_experiment(algorithm):
-    datasets_path, num_datasets = generate_datasets()
-    
+    datasets_path = [ f for f in listdir("../random_datasets") if isfile(join("../random_datasets",f)) ]
+    num_datasets = len(datasets_path)
     experiment_results = []
     
     for i in range(num_datasets):
-        current_dataset = "DATASET" + str(i) + ".json"
-        json_file_object = open(os.path.join(datasets_path, current_dataset), 'r')
+        print i
+        json_file_object = open(os.path.join("../random_datasets",datasets_path[i]), 'r')
         dataset = json.load(json_file_object)
         test_result = run_test(algorithm, dataset)
         json_file_object.close()
@@ -23,9 +24,9 @@ def run_experiment(algorithm):
     
     
     exp_file_name = algorithm + "_EXP.json"
-    exp_file_object = open(os.path.join(datasets_path, exp_file_name), 'w')
+    exp_file_object = open(os.path.join("../results", exp_file_name), 'w')
     json.dump(experiment_results, exp_file_object)
     exp_file_object.close()
     
 
-run_experiment("MinSpanTree")
+run_experiment("TwoOpt")

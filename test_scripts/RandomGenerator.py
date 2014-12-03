@@ -1,4 +1,5 @@
 #from random import *
+import os
 from operator import add
 from math import *
 from time import clock
@@ -65,19 +66,29 @@ def random_generator(size = 10, weight_range = 1000, symetric = True, sparsity =
 #x4 = random_generator(size = 10, weight_max = 1000, weight_min = 10, symetric = False, sparsity = 1.0, dis_type = "uniform")
 #x5 = random_generator(size = 10, weight_max = 1000, weight_min = 10, symetric = False, sparsity = 0.5, dis_type = "uniform")
 #x6 = random_generator(size = 10, weight_max = 1000, weight_min = 10, symetric = False, sparsity = 0.0, dis_type = "uniform")
-size = [5,6,7,8,9,10]
-symetric = [True]
-weight_ranges = [10,100,1000,10000]
-sparsity = [0.0, 0.1,0.2,0.4,0.8]
-distribution = ["uniform","normal"]
 
-for size_level in size:
-	for sym_type in symetric:
-		for wt_range in weight_ranges:
-			for sparsity_level in sparsity:
-				for distribution_type in distribution:
-					x = random_generator(size = size_level, weight_range=wt_range, symetric = sym_type, sparsity = sparsity_level, dis_type = distribution_type)
-					file_name = "SIZE" + str(size_level) + "_SYM" + str(sym_type) + "_RANGE" + str(wt_range) + "_SPARSITY" + str(sparsity_level) + "_DIST" + str(distribution_type) + ".json"
-					f = open(file_name, 'w')
-					dump(x,f)
-					f.close()					
+def generate_datasets():
+	size = [5,6,7,8,9,10]
+	symetric = [True]
+	weight_ranges = [10,100,1000,10000]
+	sparsity = [0.0, 0.1,0.2,0.4,0.8]
+	distribution = ["uniform","normal"]
+	dataset_idx = 0
+	datasets_path = "../random_datasets"
+	
+	if not os.path.exists(datasets_path):
+		os.mkdir(datasets_path)	
+
+	for size_level in size:
+		for sym_type in symetric:
+			for wt_range in weight_ranges:
+				for sparsity_level in sparsity:
+					for distribution_type in distribution:
+						x = [[size_level, sym_type, distribution_type, sparsity_level, wt_range]]
+						x.append(random_generator(size = size_level, weight_range=wt_range, symetric = sym_type, sparsity = sparsity_level, dis_type = distribution_type))
+						file_name = "DATASET" + str(dataset_idx) + ".json"
+						dataset_idx += 1
+						f = open(os.path.join(datasets_path, file_name), 'w')
+						dump(x,f)
+						f.close()
+	return datasets_path, dataset_idx

@@ -1,6 +1,6 @@
 __author__ = 'thovo'
 import sys
-from XMLParsingScript import XmlParserFinal
+import XMLParsingScript
 from algorithms import Randomized
 from algorithms import Greedy
 import timeit
@@ -82,5 +82,5 @@ def two_opt(cities):
     return result
 
 #Testing
-data = XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")
+data = XMLParsingScript.XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")
 two_opt(data[3])

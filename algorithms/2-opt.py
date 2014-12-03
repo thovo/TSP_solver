@@ -81,6 +81,6 @@ def two_opt(cities):
     print result
     return result
 
-
+#Testing
 data = XmlParserFinal.tsplib_xml_parse("../tsp_lib_xml_datasets/burma14.xml")
 two_opt(data[3])

@@ -33,6 +33,7 @@ Follow the instructions to run the test for every algorithms.
 
 ##Contact
 If you get any issues or ideas, don't hesitate to fire us an email:
-Ahmed Hassan <ahmed.adel.hassan@hotmail.com>
-Tho VO  <votuongtho@gmail.com>
-Omar Samir <omar.samir3000@gmail.com>
+
+* Ahmed Hassan <ahmed.adel.hassan@hotmail.com>
+* Tho VO  <votuongtho@gmail.com>
+* Omar Samir <omar.samir3000@gmail.com>

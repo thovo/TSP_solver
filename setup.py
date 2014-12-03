@@ -8,7 +8,7 @@ setup(
     version='0.0.1',
     description='Implement the algorithms for TSP problem',
     packages=find_packages(exclude='test_scripts'),
-    install_requires=['xlwt','prettytable','numpy'],
+    install_requires=['xlwt', 'prettytable', 'numpy', 'matplotlib'],
     url='https://github.com/thovo/aa_practice_project',
     license='GNU General Public License (GPL)',
     author='Tho VO,Ahmed Hassan,Omar Samir',

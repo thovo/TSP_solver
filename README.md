@@ -10,7 +10,7 @@ Program different algorithms for the TSP problem:
 
 1. brute-force approach
 2. branch-and-bound
-3. ~~adding and removing edges~~ 
+3. ~~adding and removing edges~~ 2-opt
 4. the minimum spanning tree 
 5. greedy approach
 6. randomized approach
@@ -30,3 +30,9 @@ After finish installing, you can run with this command:
 python TSP.py
 ```
 Follow the instructions to run the test for every algorithms.
+
+##Contact
+If you get any issues or ideas, don't hesitate to fire us an email:
+Ahmed Hassan <ahmed.adel.hassan@hotmail.com>
+Tho VO  <votuongtho@gmail.com>
+Omar Samir <omar.samir3000@gmail.com>

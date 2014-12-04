@@ -17,7 +17,10 @@ def calculate_total_distance(path, cities):
     #This function will return the total distance of a path
     total_distance = 0
     for i in range(0, len(path)-1):
-        total_distance += cities[path[i]][path[i+1]]
+        if cities[path[i]][path[i+1]] is float("inf"):
+            total_distance = sys.maxint
+        else:
+            total_distance += cities[path[i]][path[i+1]]
     return total_distance
 
 

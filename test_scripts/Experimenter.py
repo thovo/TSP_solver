@@ -13,6 +13,8 @@ def run_experiment(algorithm):
     datasets_path = [ f for f in listdir("../random_datasets") if isfile(join("../random_datasets",f)) ]
     num_datasets = len(datasets_path)
     experiment_results = []
+    bf_file_object = open(os.path.join("../results","BruteForce_EXP.json"), 'r')
+    bf_results = json.load(bf_file_object)
     
     for i in range(num_datasets):
         print i
@@ -20,6 +22,7 @@ def run_experiment(algorithm):
         dataset = json.load(json_file_object)
         test_result = run_test(algorithm, dataset)
         json_file_object.close()
+        test_result["optimality"] = bf_results[i]["cost"]/test_result["cost"]
         experiment_results.append(test_result)
     
     
@@ -29,4 +32,4 @@ def run_experiment(algorithm):
     exp_file_object.close()
     
 
-run_experiment("TwoOpt")
+run_experiment("MinSpanTree")

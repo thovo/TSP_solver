@@ -13,7 +13,7 @@ import TwoOpt
 
 class TestResult:
     def __init__(self, algorithm, num_cities, symmetry, distribution, sparsity, 
-                 weights_range, time, optimality):
+                 weights_range, time, cost, optimality):
         self.algorithm = algorithm
         self.symmetry = symmetry
         self.distribution = distribution
@@ -21,6 +21,7 @@ class TestResult:
         self.sparsity = sparsity
         self.weights_range = weights_range
         self.time = time
+        self.cost = cost
         self.optimality = optimality
         
     def get_result(self):
@@ -31,6 +32,7 @@ class TestResult:
                          "sparsity": self.sparsity, 
                          "distribution": self.distribution, 
                          "time": self.time,
+                         "cost": self.cost,
                          "optimality": self.optimality}
         return template_dict
         
@@ -40,38 +42,48 @@ def run_test(algorithm, dataset):
         result = BruteForce.BruteForce(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], 1).get_result()
+                                 result[3], result[1], 1).get_result()
     elif algorithm == "BranchNBound":
         result = BranchNBound.BranchNBound(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], 1).get_result()
+                                 result[3], result[1], 1).get_result()
     elif algorithm == "Greedy":
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
         result = Greedy.better_greedy(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown").get_result()
+                                 result[3], 
+                                 result[1], result[1]).get_result()
     elif algorithm == "Randomized":
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
         result = Randomized.better_result_of_randomized(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown").get_result()
+                                 result[3], 
+                                 result[1], result[1]).get_result()
     elif algorithm == "MinSpanTree":
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
         result = MinSpanTree.MinSpanTree(dataset[1])
         test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
-                                 result[3], "Unknown").get_result()
+                                 result[3], 
+                                 result[1], result[1]).get_result()
     elif algorithm == "EA_hillclimbing":
-            result = EA_hillclimbing.hillclimbing_algorithm(dataset[1], dataset[0][0])
-            test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
-                                     dataset[0][2], dataset[0][3], dataset[0][4], 
-                                     result[3], "Unknown").get_result()
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
+        result = EA_hillclimbing.hillclimbing_algorithm(dataset[1], dataset[0][0])
+        test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
+                                 dataset[0][2], dataset[0][3], dataset[0][4], 
+                                 result[3], 
+                                 result[1], result[1]).get_result()
             
     elif algorithm == "TwoOpt":
-            result = TwoOpt.two_opt(dataset[1])
-            test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
-                                     dataset[0][2], dataset[0][3], dataset[0][4], 
-                                     result[3], "Unknown").get_result()    
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
+        result = TwoOpt.two_opt(dataset[1])
+        test_result = TestResult(result[0], dataset[0][0], dataset[0][1], 
+                                 dataset[0][2], dataset[0][3], dataset[0][4], 
+                                 result[3], 
+                                 result[1], result[1]).get_result()    
     else:
         raise Exception("Wrong algorithm chosen!")
     

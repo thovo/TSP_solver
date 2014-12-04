@@ -9,7 +9,7 @@ sys.path.append('../XMLParsingScript')
 #import file
 from pylab import *
 from numpy import *
-from XMLParsingScript import XmlParserFinal
+from XmlParserFinal import *
 from copy import copy, deepcopy
 import random
 from collections import *
@@ -178,8 +178,8 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
     very_best_cost = 0.0
     
     for iteration in range(number_iterations):
-        #print parents
-        #print ("best_score_before = ",best_score_parent)
+        print parents
+        print ("best_score_before = ",best_score_parent)
         for currentGeneration in range(number_generations):
             #print currentGeneration
             childern = MatrixPerturb(parents) 
@@ -190,10 +190,10 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
                 parents = deepcopy(childern) 
                 best_score_parent = best_score_child
                 best_performer_parent = best_performer + [best_performer[0]]
-                #print best_score_child
-                #print best_performer_parent
-                #print currentGeneration
-                #print ("---------------")
+                print best_score_child
+                print best_performer_parent                
+                print currentGeneration
+                print ("---------------")
             fits[iteration][currentGeneration] = best_score_parent
             #print best_score
         very_best_tour = best_performer_parent

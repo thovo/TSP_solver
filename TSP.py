@@ -7,6 +7,7 @@ from algorithms import BranchNBound
 from algorithms import Greedy
 from algorithms import Randomized
 from algorithms import MinSpanTree
+from algorithms import TwoOpt
 from XMLParsingScript import XmlParserFinal
 import xlwt
 from datetime import datetime
@@ -130,7 +131,7 @@ def tsp():
     #The list of available algorithms
     algorithms = [[1, "Greedy"], [2, "Randomized"],
                   [3, "Brute Force"], [4, "Branch and Bound"],
-                  [5, "Genetic"], [6, "Evolutionary"], [7, "Minimum Spanning Tree"]]
+                  [5, "Genetic"], [6, "Evolutionary"], [7, "Minimum Spanning Tree"], [8, '2-opt']]
     algorithms_table = PrettyTable(["Number", "Algorithm"])
     for i in range(0, len(algorithms)):
         algorithms_table.add_row(algorithms[i])
@@ -176,6 +177,9 @@ def tsp():
             if int(algorithm_number) == 7:
                 print "You chose MST!"
                 results.append(MinSpanTree.MinSpanTree(cities[3]))
+            if int(algorithm_number) == 8:
+                print "You chose 2-opt"
+                results.append(TwoOpt.two_opt(cities))
 
     if int(user_algorithm_options_input) == 2:
         print "WARNING: You chose to run all algorithms. " \

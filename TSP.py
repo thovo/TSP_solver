@@ -7,6 +7,8 @@ from algorithms import BranchNBound
 from algorithms import Greedy
 from algorithms import Randomized
 from algorithms import MinSpanTree
+from algorithms import GA
+from algorithms import EA_hillclimbing
 from XMLParsingScript import XmlParserFinal
 import xlwt
 from datetime import datetime
@@ -137,7 +139,6 @@ def tsp():
 
     #The results will be contain in a list
     results = []
-
     print "Step 2: Choose the algorithm"
     print algorithms_table
     print "You have two options:"
@@ -169,10 +170,10 @@ def tsp():
                 results.append(BranchNBound.BranchNBound(cities[3]))
             if int(algorithm_number) == 5:
                 print "You chose Genetic!"
-                results.append()
+                results.append(GA.genetic_algorithm(cities[3], cities[2]))
             if int(algorithm_number) == 6:
                 print "You chose Evolutionary!"
-                results.append()
+                results.append(EA_hillclimbing.hillclimbing_algorithm(cities[3], cities[2]))
             if int(algorithm_number) == 7:
                 print "You chose MST!"
                 results.append(MinSpanTree.MinSpanTree(cities[3]))

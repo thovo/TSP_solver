@@ -9,7 +9,7 @@ sys.path.append('../XMLParsingScript')
 #import file
 from pylab import *
 from numpy import *
-from XmlParserFinal import *
+from XMLParsingScript import XmlParserFinal
 from copy import copy, deepcopy
 import random
 from collections import *

@@ -32,4 +32,4 @@ def run_experiment(algorithm):
     exp_file_object.close()
     
 
-run_experiment("MinSpanTree")
+run_experiment("Genetic")

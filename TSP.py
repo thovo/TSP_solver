@@ -11,6 +11,7 @@ from algorithms import GA
 from algorithms import EA_hillclimbing
 from algorithms import TwoOpt
 from XMLParsingScript import XmlParserFinal
+from test_scripts import RandomGenerator
 import xlwt
 from datetime import datetime
 
@@ -124,7 +125,9 @@ def tsp():
     if int(user_input) is 3:
         print "Random data is generating."
         #Get random data
-        cities = []
+        size = 10
+        cities = ["Random Generated Data", "Data size of 10", size]
+        cities.append(RandomGenerator.random_generator(size))
     #The list of algorithms options
     algorithms_option = [[1, "Choose several algorithms, separate by comma"], [2, "All"]]
     algorithms_option_table = PrettyTable(["Number", "Description"])
@@ -180,12 +183,18 @@ def tsp():
                 results.append(MinSpanTree.MinSpanTree(cities[3]))
             if int(algorithm_number) == 8:
                 print "You chose 2-opt"
-                results.append(TwoOpt.two_opt(cities))
+                results.append(TwoOpt.two_opt(cities[3]))
 
     if int(user_algorithm_options_input) == 2:
         print "WARNING: You chose to run all algorithms. " \
               "The time to run should be finite but we actually don't know when will the program finish"
-
+        print "This option can't finish for Brute Force and Branch N Bound"
+        results.append(Greedy.better_greedy(cities[3]))
+        results.append(Randomized.better_result_of_randomized(cities[3], 10000))
+        results.append(GA.genetic_algorithm(cities[3], cities[2]))
+        results.append(EA_hillclimbing.hillclimbing_algorithm(cities[3], cities[2]))
+        results.append(MinSpanTree.MinSpanTree(cities[3]))
+        results.append(TwoOpt.two_opt(cities[3]))
     result_table = PrettyTable(["Algorithm", "Cost", "Path", "Time"])
     for result_item in results:
         result_table.add_row(result_item)

@@ -1,6 +1,6 @@
 __author__ = 'thovo'
 import sys
-#from XMLParsingScript import XmlParserFinal
+# from XMLParsingScript import XmlParserFinal
 import timeit
 import random
 import time
@@ -35,7 +35,7 @@ def greedy(cities, start_city=0):
                 if current_cost > cities[temp][x]:
                     current_cost = cities[temp][x]
                     position = x
-        cost += current_cost
+        cost += int(current_cost)
         #Reset current cost for next calculating
         current_cost = 0
         temp = position
@@ -58,7 +58,7 @@ def greedy(cities, start_city=0):
 
 def better_greedy(cities):
     start = timeit.default_timer()
-    print "greedy algorithm is running. Please wait!"
+    # print "greedy algorithm is running. Please wait!"
     result = greedy(cities, 0)
     result_temp = []
     i = 0

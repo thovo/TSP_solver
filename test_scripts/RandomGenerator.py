@@ -7,7 +7,7 @@ from numpy.random import *
 from json import *
 import sys
 sys.path.append('../algorithms')
-import Greedy
+from algorithms import Greedy
 
 def random_generator(size = 10, weight_range = 1000, symetric = True, sparsity = 0.0, dis_type = "uniform"):
 	weight_max = 2 * weight_range

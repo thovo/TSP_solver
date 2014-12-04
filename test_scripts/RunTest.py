@@ -76,6 +76,13 @@ def run_test(algorithm, dataset):
                                  dataset[0][2], dataset[0][3], dataset[0][4], 
                                  result[3], 
                                  result[1], result[1]).get_result()
+    elif algorithm == "Genetic":
+        #bb_result = BranchNBound.BranchNBound(dataset[1])
+        result = GA.genetic_algorithm(dataset[1], dataset[0][0])
+        test_result = TestResult(result[0], dataset[0][0], dataset[0][1],
+                                 dataset[0][2], dataset[0][3], dataset[0][4],
+                                 result[3],
+                                 result[1], result[1]).get_result()
             
     elif algorithm == "TwoOpt":
         #bb_result = BranchNBound.BranchNBound(dataset[1])

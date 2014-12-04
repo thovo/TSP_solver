@@ -48,7 +48,7 @@ def randomized(cities,start_city=0):
 
 def better_result_of_randomized(cities, iteration=1000):
     start = timeit.default_timer()
-    print "randomized algorithm is running. Please wait!"
+    # print "randomized algorithm is running. Please wait!"
     result = randomized(cities)
     try:
         int(iteration)

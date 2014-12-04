@@ -8,7 +8,7 @@ sys.path.append('../XMLParsingScript')
 
 from pylab import *
 from numpy import *
-from XmlParserFinal import *
+# from XmlParserFinal import *
 from copy import copy, deepcopy
 import random
 from time import clock

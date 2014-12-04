@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, "../algorithms")
 #import XMLParsingScript
 #from algorithms import Randomized
-import Greedy
+from algorithms import Greedy
 import timeit
 import random
 import time
@@ -59,7 +59,7 @@ def two_opt(cities):
     #Get a random or initial tour
     #result = Randomized.randomized(cities)
     result = Greedy.greedy(cities)
-    print result
+    # print result
     path = result[2]
     cost = result[1]
     #number of nodes eligible to be swapped will be length of the path - first city - last city - 1
@@ -83,7 +83,7 @@ def two_opt(cities):
     algorithm = "2-opt"
     result[0] = algorithm
     result[3] = time_finish
-    print result
+    # print result
     return result
 
 #Testing

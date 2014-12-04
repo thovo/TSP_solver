@@ -9,7 +9,7 @@ sys.path.append('../XMLParsingScript')
 #import file
 from pylab import *
 from numpy import *
-from XmlParserFinal import *
+#from XmlParserFinal import *
 from copy import copy, deepcopy
 import random
 from collections import *
@@ -212,12 +212,12 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
     
     GA_output = ["Genetic Algorithm",very_best_cost,very_best_tour,GA_time]
     
-    figure(figure_index)    
-    plot (range(number_generations),fits[0])
-    ylabel('Fitness')
-    xlabel('Generation')
-    figure_index += 1
-    savefig(dataset_id[0:-4])
+    #figure(figure_index)    
+    #plot (range(number_generations),fits[0])
+    #ylabel('Fitness')
+    #xlabel('Generation')
+    #figure_index += 1
+    #savefig(dataset_id[0:-4])
     #figure(2)
     #imshow(fits, cmap=cm.gray, aspect='auto', interpolation='nearest')
     #ylabel('Gene')
@@ -236,26 +236,26 @@ def genetic_algorithm(city_matrix_input, number_cities, num_iter = 1, population
 # - I'll draw a comparison between the optimal solution for each set and the result of the GA.
 # - I'll record the time of one generation, and put it on the graph
 
-opt_sols = {}
-opt_sols["gr17.xml"] = 2085
-opt_sols["gr21.xml"] = 2707
-opt_sols["gr24.xml"] = 1272
-opt_sols["gr48.xml"] = 5046
+#opt_sols = {}
+#opt_sols["gr17.xml"] = 2085
+#opt_sols["gr21.xml"] = 2707
+#opt_sols["gr24.xml"] = 1272
+#opt_sols["gr48.xml"] = 5046
 
-ga_output = {}
+#ga_output = {}
 
-for dataset in opt_sols.keys():
-    path_name = '../tsp_lib_xml_datasets/' + dataset
-    #print path_name
-    matrix_read = tsplib_xml_parse(path_name)
-    #print matrix_read
-    dataset_name = matrix_read[0]
-    n_c = matrix_read[2]
-    c = matrix_read[3]
-    #genetic_algorithm(city_matrix_input=c,number_cities=n_c)
-    print "dataset: " + dataset + "has started"
-    ga_output[dataset] = genetic_algorithm(city_matrix_input=c,number_cities=n_c, population_size=2000, num_gen = 300, dataset_id = dataset)
-    print "DONE!"
+#for dataset in opt_sols.keys():
+    #path_name = '../tsp_lib_xml_datasets/' + dataset
+    ##print path_name
+    #matrix_read = tsplib_xml_parse(path_name)
+    ##print matrix_read
+    #dataset_name = matrix_read[0]
+    #n_c = matrix_read[2]
+    #c = matrix_read[3]
+    ##genetic_algorithm(city_matrix_input=c,number_cities=n_c)
+    #print "dataset: " + dataset + "has started"
+    #ga_output[dataset] = genetic_algorithm(city_matrix_input=c,number_cities=n_c, population_size=2000, num_gen = 300, dataset_id = dataset)
+    #print "DONE!"
     
     
-print ga_output
+#print ga_output

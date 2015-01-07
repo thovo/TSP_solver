@@ -10,7 +10,7 @@ The algorithms developed for solving the TSP problem are:
 
 1. Brute-force approach
 2. Branch-and-Bound approach
-3. ~~adding and removing edges~~ 2-opt
+3. 2-opt (edge swapping)
 4. Minimum Spanning Tree approximation
 5. Greedy approach and Itrative greedy
 6. Randomized approach

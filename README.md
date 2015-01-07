@@ -5,17 +5,17 @@ Advanced algorithms practice project of MLDM first year students
 ##Description
 The objective of this project is to implement some algorithms for solving **Traveling Salesman Problem (TSP)** 
 and to provide an experimental study of their running time and the quality of the outputs as well.
-##Alogorithms finished
-Program different algorithms for the TSP problem:
+##Alogorithms Included
+The algorithms developed for solving the TSP problem are:
 
-1. brute-force approach
-2. branch-and-bound
+1. Brute-force approach
+2. Branch-and-Bound approach
 3. ~~adding and removing edges~~ 2-opt
-4. the minimum spanning tree 
-5. greedy approach
-6. randomized approach
-7. genetic programming or ant colony approach
-8. ~~personal~~ evolution algorithm
+4. Minimum Spanning Tree approximation
+5. Greedy approach and Itrative greedy
+6. Randomized approach
+7. Genetic algorithm
+8. Evolutionary algorithm (Hillclimbing based)
 
 ##Installation
 Clone the repository at this link: 
@@ -30,6 +30,12 @@ After finish installing, you can run with this command:
 python TSP.py
 ```
 Follow the instructions to run the test for every algorithms.
+
+## Utilities
+1. XmlParserFinal: XML parser script for parsing TSPLIB95 xml files to python friendly input
+2. RandomGenerator: Random TSP data generator with different configuration available
+3. grahping: Automated graphing script using matplotlib APIs
+4. Experimenter: Automation script for running of tests on algorithms and logging of results
 
 ##Contact
 If you get any issues or ideas, don't hesitate to fire us an email:

@@ -1,7 +1,7 @@
-aa_practice_project
+TSP solver
 ===================
 
-Advanced algorithms practice project of MLDM first year students
+Advanced algorithms practice project of MLDM first year students for TSP problem
 ##Description
 The objective of this project is to implement some algorithms for solving **Traveling Salesman Problem (TSP)** 
 and to provide an experimental study of their running time and the quality of the outputs as well.
